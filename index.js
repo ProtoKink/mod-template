@@ -178,7 +178,6 @@ var ModName = (() => {
       });
     }
     load() {
-      var _a15, _b;
       for (let i of x()) i.settingsScreen && (!i.settings || !Object.keys(i.settings).length) && i.registerDefaultSettings(p.playerStorage);
       _a2.currentPage = 1, b.getSubscreen();
       let e = b.getSettingsDiv();
@@ -189,7 +188,7 @@ var ModName = (() => {
       if (this.options.help) {
         let i = this.options.help.onClick, o = r(() => {
         }, "action");
-        typeof i == "string" || i instanceof URL ? o = r(() => window.open(i, "_blank"), "action") : typeof i == "function" ? o = i : i instanceof _a2 && (o = r(async () => await this.setSubscreen(i), "action")), (_a15 = this.options.help).tooltip ?? (_a15.tooltip = g("settings.button.help_button_hint")), (_b = this.options.help).icon ?? (_b.icon = `${"undefined/public"}/dl_images/bookmark.svg`);
+        typeof i == "string" || i instanceof URL ? o = r(() => window.open(i, "_blank"), "action") : typeof i == "function" ? o = i : i instanceof _a2 && (o = r(async () => await this.setSubscreen(i), "action")), this.options.help.tooltip ??= g("settings.button.help_button_hint"), this.options.help.icon ??= `${"undefined/public"}/dl_images/bookmark.svg`;
         let s = u.createButton({ id: "deeplib-help", size: [90, 90], onClick: o, options: { image: this.options.help.icon, tooltip: this.options.help.tooltip } });
         _a2.menu.append(s);
       }
@@ -680,7 +679,7 @@ var ModName = (() => {
       }), w.hookFunction("ElementButton.CreateForAsset", E.ModifyBehavior, (n, i) => {
         if (!this.debugSettings.showRawAssetNames) return i(n);
         let [, o, , , s] = n;
-        return o = ("Asset" in o ? o : { Asset: o }).Asset, s ?? (s = {}), s.label = o.Name, i(n);
+        return o = ("Asset" in o ? o : { Asset: o }).Asset, s ??= {}, s.label = o.Name, i(n);
       });
     }
     unload() {
@@ -830,7 +829,7 @@ var ModName = (() => {
   var _a6;
   var U = (_a6 = class extends L {
     constructor(e) {
-      super(), e ?? (e = {}), _a6.newVersionMessage = e.newVersionMessage, e.migrators && (_a6.migrators = e.migrators, _a6.migrators.sort((n, i) => n.migrationVersion.localeCompare(i.migrationVersion))), _a6.beforeEach = e.beforeEach, _a6.afterEach = e.afterEach, _a6.beforeAll = e.beforeAll, _a6.afterAll = e.afterAll;
+      super(), e ??= {}, _a6.newVersionMessage = e.newVersionMessage, e.migrators && (_a6.migrators = e.migrators, _a6.migrators.sort((n, i) => n.migrationVersion.localeCompare(i.migrationVersion))), _a6.beforeEach = e.beforeEach, _a6.afterEach = e.afterEach, _a6.beforeAll = e.beforeAll, _a6.afterAll = e.afterAll;
     }
     load() {
       _a6.version = "1.0.0", _a6.checkVersionUpdate(), p.playerStorage.GlobalModule.doShowNewVersionMessage && _a6.isItNewVersion && _a6.sendNewVersionMessage();
@@ -1007,7 +1006,7 @@ var ModName = (() => {
   r(ge, "tryCatchAsync");
   var u = { createButton: Ee, createCheckbox: Me, createInput: Re, createLabel: Ae, createCustom: Ve, createDropdown: We, createTooltip: De, getTooltip: he, setTooltip: ee, createBackNext: Xe };
   function Ee(t) {
-    t.id ?? (t.id = ElementGenerateID());
+    t.id ??= ElementGenerateID();
     let e = document.getElementById(t.id);
     if (e) return e;
     t.type = "button";
@@ -1020,7 +1019,7 @@ var ModName = (() => {
   __name(Ee, "Ee");
   r(Ee, "elementCreateButton");
   function Me(t) {
-    t.id ?? (t.id = ElementGenerateID());
+    t.id ??= ElementGenerateID();
     let e = document.getElementById(t.id);
     if (e) return e;
     t.type = "checkbox";
@@ -1036,8 +1035,7 @@ var ModName = (() => {
   __name(Me, "Me");
   r(Me, "elementCreateCheckbox");
   function Ve(t) {
-    var _a15, _b;
-    t.id ?? (t.id = ElementGenerateID()), (_a15 = t.htmlOptions).attributes ?? (_a15.attributes = {}), (_b = t.htmlOptions.attributes).id ?? (_b.id = t.id);
+    t.id ??= ElementGenerateID(), t.htmlOptions.attributes ??= {}, t.htmlOptions.attributes.id ??= t.id;
     let e = document.getElementById(t.htmlOptions.attributes.id);
     if (e) return e;
     t.type = "custom";
@@ -1047,7 +1045,7 @@ var ModName = (() => {
   __name(Ve, "Ve");
   r(Ve, "elementCreateCustom");
   function Re(t) {
-    t.id ?? (t.id = ElementGenerateID());
+    t.id ??= ElementGenerateID();
     let e = document.getElementById(t.id);
     if (e) return e;
     let n = typeof t?.disabled == "function" ? t?.disabled() : t?.disabled, i = ElementCreate(f({ tag: "label", classList: ["deeplib-input-container", t?.options?.direction ?? void 0], attributes: { id: `${t.id}-container`, for: t.id }, children: [t.label ? f({ tag: "span", classList: ["deeplib-text"], attributes: { id: `${t.id}-label` }, children: [t.label] }, t.htmlOptions?.label) : void 0, f({ tag: "input", classList: ["deeplib-input"], attributes: { type: t.type, id: t.id, placeholder: " ", disabled: n, value: t?.setElementValue?.() || void 0 }, eventListeners: { input: r(function() {
@@ -1062,7 +1060,7 @@ var ModName = (() => {
   __name(Re, "Re");
   r(Re, "elementCreateInput");
   function Ae(t) {
-    t.id ?? (t.id = ElementGenerateID());
+    t.id ??= ElementGenerateID();
     let e = document.getElementById(t.id);
     if (e) return e;
     t.type = "label";
@@ -1076,7 +1074,7 @@ var ModName = (() => {
   __name(Ae, "Ae");
   r(Ae, "elementCreateLabel");
   function We(t) {
-    t.id ?? (t.id = ElementGenerateID());
+    t.id ??= ElementGenerateID();
     let e = document.getElementById(`${t.id}-container`);
     if (e) return e;
     t.type = "dropdown";
@@ -1135,7 +1133,7 @@ var ModName = (() => {
   __name(fe, "fe");
   r(fe, "elementSetTooltipPosition");
   function Xe(t) {
-    t.id ?? (t.id = ElementGenerateID());
+    t.id ??= ElementGenerateID();
     let e = document.getElementById(t.id);
     if (e) return e;
     let n = r((l) => {
@@ -1333,7 +1331,7 @@ var ModName = (() => {
       __publicField(this, "resolve", r(() => {
       }, "resolve"));
       this.opts = e;
-      e ?? (e = {}), e.closeOnBackdrop ?? (e.closeOnBackdrop = true), e.modalClassList ?? (e.modalClassList = []);
+      e ??= {}, e.closeOnBackdrop ??= true, e.modalClassList ??= [];
       let n = `modal-prompt-${Date.now()}`, i = (CommonIsArray(e.prompt) ? e.prompt : [e.prompt]).filter((o) => o !== null) ?? [""];
       this.dialog = ElementCreate({ tag: "dialog", classList: ["deeplib-modal", ...e.modalClassList], attributes: { id: this.opts.modalId ?? `modal-${Date.now()}`, role: "dialog", "aria-modal": "true", "aria-labelledby": n }, children: [{ tag: "div", classList: ["deeplib-modal-prompt-container"], children: [...i] }, { tag: "div", classList: ["deeplib-modal-prompt"], attributes: { id: n }, children: [e.input ? this.renderInput(e.input) : void 0] }, this.renderButtons()] }), ElementSetFontSize(this.dialog, "auto"), this.blocker = this.createBlocker(), this.renderButtons(), document.body.append(this.createBlocker(), this.dialog), this.setupFocusTrap(), e.timeoutMs && (this.timeoutId = window.setTimeout(() => this.close("timeout"), e.timeoutMs)), e.onShow && e.onShow.call(this.dialog), this.updateIntervalId = window.setInterval(() => {
         ElementSetFontSize(this.dialog, "auto");
@@ -1551,7 +1549,7 @@ var ModName = (() => {
   var Y = (_a12 = class {
     constructor(e) {
       __publicField(this, "modName");
-      return _a12._instance || (_a12._instance = this, this.modName = e), this.modName ?? (this.modName = e), _a12._instance;
+      return _a12._instance || (_a12._instance = this, this.modName = e), this.modName ??= e, _a12._instance;
     }
     get playerStorage() {
       return Player[this.modName];
